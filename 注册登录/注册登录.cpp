@@ -4,17 +4,6 @@ using namespace std;
 
 int CheckUserName(string UserName);
 int CheckPassword(string Password);
-//class SignUp
-//{
-//public:
-//	SignUp();
-//	~SignUp();
-//	int sign_up();
-//	int log_in();
-//private:
-//	string UserName;
-//	string Password;
-//};
 
 int main()
 {
