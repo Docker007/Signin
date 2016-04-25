@@ -41,12 +41,21 @@ int CheckUserName(string UserName)
 
 int CheckPassword(string Password)
 {
+	int upper_letter(0), lower_letter(0), number(0);
 	for (unsigned  i = 0; i < Password.size(); i++)
 	{
+		if (Password[i] >= 'a' && Password[i] <= 'z')
+			lower_letter++;
+		if (Password[i] >= 'A'&&Password[i] <= 'Z')
+			upper_letter++;
+		if (Password[i] >= '0'&&Password[i] <= '9')
+			number++;
 		if(Password[i]==' ')
 		{
 			return 0;
 		}
 	}
+	if (upper_letter == 0 || lower_letter == 0 || number == 0)
+		return 0;
 	return 1;
 }
