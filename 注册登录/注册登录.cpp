@@ -7,33 +7,20 @@ using namespace std;
 int CheckUserName(string UserName);
 int CheckPassword(string Password);
 int SaveUser(string UserName, string Password);
+int CheckProfile(string UserName, string Password);
 
 int main()	 
 {
 	int flag = 0;
 	string UserName;
 	string Password;
+	cout << "1.Sign up." << endl;
+	cout << "2.Sign in." << endl;
 	cout << "Input UserName: " << endl;
 	getline(cin, UserName);
 	cout << "Input password: " << endl;
 	getline(cin, Password);
-	if (CheckUserName(UserName) == 0)
-	{
-		cout << "Username is invalid!" << endl;
-	}
-	else if (CheckPassword(Password) == 0)
-	{
-		cout << "Password is invalid!" << endl;
-	}
-	else
-	{
-		cout << "Login successfully!" << endl;
-		flag = 1;
-	}
-	if (flag=1)
-	{
-		SaveUser(UserName, Password);
-	}
+	CheckProfile(UserName, Password);
 	return 0;
 }
 
@@ -82,5 +69,27 @@ int SaveUser(string UserName, string Password)
 	outfileUserName.close();
 	outfilePassword.close();
 	return 1;
+}
+
+int CheckProfile(string UserName, string Password)
+{
+	if (CheckUserName(UserName) == 0)
+	{
+		cout << "Username is invalid!" << endl;
+	}
+	else if (CheckPassword(Password) == 0)
+	{
+		cout << "Password is invalid!" << endl;
+	}
+	else
+	{
+		int SaveFileFlag = SaveUser(UserName, Password);
+		if (SaveFileFlag = 1)
+		{
+			cout << "Sign up sucessfully!" << endl;
+		}
+		else cout << "Sign up failed..." << endl;
+	}
+	return 0;
 }
 
