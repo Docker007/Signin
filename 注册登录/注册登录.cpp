@@ -3,24 +3,39 @@
 #include<string>
 #include<vector>
 using namespace std;
+int UserNumber = 0;
 
 int CheckUserName(string UserName);
 int CheckPassword(string Password);
 int SaveUser(string UserName, string Password);
 int CheckProfile(string UserName, string Password);
-
+int CheckRepetition(string UserName, string Password);
 int main()	 
 {
-	int flag = 0;
+	int Select;
 	string UserName;
 	string Password;
 	cout << "1.Sign up." << endl;
 	cout << "2.Sign in." << endl;
-	cout << "Input UserName: " << endl;
-	getline(cin, UserName);
-	cout << "Input password: " << endl;
-	getline(cin, Password);
-	CheckProfile(UserName, Password);
+	cout << "3.Exit." << endl;
+	cout << "Select a function: " << endl;
+	cin >> Select;
+	switch (Select)
+	{
+	case 1: 
+	{
+		cout << "Input UserName: " << endl;
+		getline(cin, UserName);
+		cout << "Input password: " << endl;
+		getline(cin, Password);
+		CheckProfile(UserName, Password);
+		break;
+	}
+	case 2:cout << "Sign in." << endl; break;
+	default:
+		break;
+	}
+	
 	return 0;
 }
 
@@ -83,13 +98,46 @@ int CheckProfile(string UserName, string Password)
 	}
 	else
 	{
+		int CheckPepFlag = CheckRepetition(UserName, Password);
+		if (CheckPepFlag == 0)
+		{
+			cout << "用户名已存在!" << endl;
+			return 0;
+		}
 		int SaveFileFlag = SaveUser(UserName, Password);
 		if (SaveFileFlag = 1)
 		{
 			cout << "Sign up sucessfully!" << endl;
+			UserNumber++;
+			cout << "当前共有" << UserNumber << "名用户" << endl;
 		}
 		else cout << "Sign up failed..." << endl;
 	}
 	return 0;
+}
+
+int CheckRepetition(string UserName, string Password)
+{
+	ifstream inputUserList;
+	int count = 0;
+	inputUserList.open("C:\\Users\\Hanxi\\Music\\login\\username.txt"); //打开文件
+	vector<string> User;  //临时存储用户名
+	string temp;
+	while (getline(inputUserList,temp))  //将用户名从文件中写入临时vector中
+	{
+		User.push_back(temp);
+		count++;
+	}
+	for (int i = 0; i < count; i++)   //输出测试
+	{
+		cout << User[i] << endl;
+	}
+	inputUserList.close();              //关闭文件
+	for (int i = 0; i < count; i++)
+	{
+		if (UserName == User[i])
+			return 0;
+	}
+	return 1;
 }
 
