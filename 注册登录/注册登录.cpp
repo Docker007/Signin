@@ -1,12 +1,16 @@
 #include<iostream>
+#include<fstream>
 #include<string>
+#include<vector>
 using namespace std;
 
 int CheckUserName(string UserName);
 int CheckPassword(string Password);
+int SaveUser(string UserName, string Password);
 
-int main()
+int main()	 
 {
+	int flag = 0;
 	string UserName;
 	string Password;
 	cout << "Input UserName: " << endl;
@@ -22,7 +26,14 @@ int main()
 		cout << "Password is invalid!" << endl;
 	}
 	else
+	{
 		cout << "Login successfully!" << endl;
+		flag = 1;
+	}
+	if (flag=1)
+	{
+		SaveUser(UserName, Password);
+	}
 	return 0;
 }
 
@@ -59,3 +70,17 @@ int CheckPassword(string Password)
 		return 0;
 	return 1;
 }
+
+int SaveUser(string UserName, string Password)
+{
+	//vector<string> UserList;
+	//vector<string> PsdList;
+	ofstream outfileUserName("C:\\Users\\Hanxi\\Music\\login\\username.txt", ios_base::app);
+	ofstream outfilePassword("C:\\Users\\Hanxi\\Music\\login\\password.txt", ios_base::app);
+	outfileUserName << UserName << "\n";
+	outfilePassword << Password << "\n";
+	outfileUserName.close();
+	outfilePassword.close();
+	return 1;
+}
+
