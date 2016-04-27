@@ -1,3 +1,4 @@
-# Login
-##判断用户名和密码是否合法
+# Sign in and sign up.
+##
+##
 ##一个Visual Studio2015工程
