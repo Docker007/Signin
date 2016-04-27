@@ -5,24 +5,28 @@
 using namespace std;
 int UserNumber = 0;
 
-int CheckUserName(string UserName);
-int CheckPassword(string Password);
-int SaveUser(string UserName, string Password);
-int CheckProfile(string UserName, string Password);
-int CheckRepetition(string UserName, string Password);
-int main()	 
+void ReadUserNumber(int &UserNumber);         //从文件中读取当前用户数
+void WriteUserNumber(int &UserNumber);        //将当前用户数写入文件
+int CheckUserName(string UserName);           //检查用户名是合法
+int CheckPassword(string Password);            //检查密码是否合法
+int SaveUser(string UserName, string Password);//将用户名和密码保存至文件
+int CheckProfile(string UserName, string Password);//调用用户名检查函数与密码检查函数检查用户名与密码
+int CheckRepetition(string UserName, string Password);//检查用户名是否重复
+
+int main()	                                        //主函数
 {
 	int Select;
 	string UserName;
 	string Password;
-	cout << "1.Sign up." << endl;
+	cout << "1.Sign up." << endl;                   //功能选择
 	cout << "2.Sign in." << endl;
 	cout << "3.Exit." << endl;
 	cout << "Select a function: " << endl;
 	cin >> Select;
+	getchar();
 	switch (Select)
 	{
-	case 1: 
+	case 1:
 	{
 		cout << "Input UserName: " << endl;
 		getline(cin, UserName);
@@ -31,12 +35,28 @@ int main()
 		CheckProfile(UserName, Password);
 		break;
 	}
-	case 2:cout << "Sign in." << endl; break;
+	case 2:cout << "Sign in.........." << endl; break;
+	case 3:return 0;
 	default:
-		break;
+		cout << "这个数不行，换个吧。。。" << endl; break;
 	}
 	
 	return 0;
+}
+
+void ReadUserNumber(int &UserNumber)
+{
+	ifstream UserNumberFile("C:\\Users\\Hanxi\\Music\\login\\UserNumber.txt");
+	UserNumberFile >> UserNumber;
+	cout << "当前共有" << UserNumber << "名用户。" << endl;
+}
+
+void WriteUserNumber(int& UserNumber)
+{
+	ofstream UserNumberFile("C:\\Users\\Hanxi\\Music\\login\\UserNumber.txt");
+	UserNumberFile << UserNumber << endl;
+	UserNumberFile.close();
+	cout << "当前共有" << UserNumber << "名用户。" << endl;
 }
 
 int CheckUserName(string UserName)
@@ -107,9 +127,14 @@ int CheckProfile(string UserName, string Password)
 		int SaveFileFlag = SaveUser(UserName, Password);
 		if (SaveFileFlag = 1)
 		{
+			cout << "您注册前";
+			ReadUserNumber(UserNumber);
 			cout << "Sign up sucessfully!" << endl;
 			UserNumber++;
-			cout << "当前共有" << UserNumber << "名用户" << endl;
+			WriteUserNumber(UserNumber);
+			cout << "您注册后";
+			ReadUserNumber(UserNumber);
+			
 		}
 		else cout << "Sign up failed..." << endl;
 	}
@@ -128,10 +153,10 @@ int CheckRepetition(string UserName, string Password)
 		User.push_back(temp);
 		count++;
 	}
-	for (int i = 0; i < count; i++)   //输出测试
-	{
-		cout << User[i] << endl;
-	}
+	//for (int i = 0; i < count; i++)   //输出测试
+	//{
+	//	cout << User[i] << endl;
+	//}
 	inputUserList.close();              //关闭文件
 	for (int i = 0; i < count; i++)
 	{
