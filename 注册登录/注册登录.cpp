@@ -19,44 +19,41 @@ int main()	                                        //主函数
 	int Select;
 	string UserName;
 	string Password;
-	cout << "1.Sign up." << endl;                   //功能选择
-	cout << "2.Sign in." << endl;
-	cout << "3.Exit." << endl;
-	cout << "Select a function: " << endl;
+	cout << "1.注册." << endl;                   //功能选择
+	cout << "2.登录." << endl;
+	cout << "3.退出." << endl;
+	cout << "选择一个功能: " << endl;
 	cin >> Select;
 	getchar();
 	switch (Select)
 	{
 	case 1:
 	{
-		cout << "Input UserName: " << endl;
+		cout << "输入用户名: " << endl;
 		getline(cin, UserName);
-		cout << "Input password: " << endl;
+		cout << "输入密码: " << endl;
 		getline(cin, Password);
 		CheckProfile(UserName, Password);
 		break;
 	}
 	case 2: 
 	{
-		cout << "Input username: ";
+		cout << "输入用户名: ";
 		getline(cin, UserName);
-		cout << "\n" << "Input password: ";
+		cout << "输入密码: ";
 		getline(cin, Password);
-		if (CheckSigninPsd(UserName, Password) == 1)
-		{
-			cout << "Sign in successfully." << endl;
-		}
-		else
-		{
-			cout << "Password is incorrect!" << endl;
-		}
+		int flag = CheckSigninPsd(UserName, Password);
+		if (flag == 1)
+			cout << "登录成功." << endl;
+		else if(flag == 0)
+			cout << "登录失败" << endl;
 		break;
 	}
 	case 3:return 0;
 	default:
 		cout << "这个数不行，换个吧。。。" << endl; break;
 	}
-	
+	system("pause");
 	return 0;
 }
 
@@ -126,11 +123,11 @@ bool CheckProfile(string UserName, string Password)
 {
 	if (CheckUserName(UserName) == 0)
 	{
-		cout << "Username is invalid!" << endl;
+		cout << "用户名不合法!" << endl;
 	}
 	else if (CheckPassword(Password) == 0)
 	{
-		cout << "Password is invalid!" << endl;
+		cout << "密码不合法!" << endl;
 	}
 	else
 	{
@@ -145,14 +142,14 @@ bool CheckProfile(string UserName, string Password)
 		{
 			cout << "您注册前";
 			ReadUserNumber(UserNumber);
-			cout << "Sign up sucessfully!" << endl;
+			cout << "注册成功!" << endl;
 			UserNumber++;
 			WriteUserNumber(UserNumber);
 			cout << "您注册后";
 			ReadUserNumber(UserNumber);
 			
 		}
-		else cout << "Sign up failed..." << endl;
+		else cout << "注册失败" << endl;
 	}
 	return 0;
 }
@@ -184,7 +181,8 @@ bool CheckRepetition(string UserName)
 
 bool CheckSigninPsd(string UserName, string Password)
 {
-	int count;
+	int count = 0;
+	int flag = 0;           //ID是否已注册的标志
 	int countUser = 0;
 	int countPsd = 0;
 	ifstream inputUserList;
@@ -212,10 +210,19 @@ bool CheckSigninPsd(string UserName, string Password)
 		if (UserName == User[i])
 		{
 			count = i;
+			flag = 1;
 			break;
 		}
 	}
-	if (Password != Psd[count])
+	if (flag == 0)
+	{
+		cout << "您还未注册！" << endl;
 		return 0;
+	}
+	if (Password != Psd[count])
+	{
+		cout << "密码错误！" << endl;
+		return 0;
+	}
 	return 1;
 }
