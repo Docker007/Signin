@@ -29,6 +29,7 @@ int main()	                                        //主函数
 	{
 	case 1:
 	{
+		cout << "确保计算机存在此文件夹:C:\\Users\\Hanxi\\Music\\login" << endl;
 		cout << "输入用户名: " << endl;
 		getline(cin, UserName);
 		cout << "输入密码: " << endl;
