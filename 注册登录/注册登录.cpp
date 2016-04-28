@@ -7,11 +7,11 @@ int UserNumber = 0;
 
 void ReadUserNumber(int &UserNumber);         //从文件中读取当前用户数
 void WriteUserNumber(int &UserNumber);        //将当前用户数写入文件
-int CheckUserName(string UserName);           //检查用户名是合法
-int CheckPassword(string Password);            //检查密码是否合法
-int SaveUser(string UserName, string Password);//将用户名和密码保存至文件
-int CheckProfile(string UserName, string Password);//调用用户名检查函数与密码检查函数检查用户名与密码
-int CheckRepetition(string UserName, string Password);//检查用户名是否重复
+bool CheckUserName(string UserName);           //检查用户名是合法
+bool CheckPassword(string Password);            //检查密码是否合法
+bool SaveUser(string UserName, string Password);//将用户名和密码保存至文件
+bool CheckProfile(string UserName, string Password);//调用用户名检查函数与密码检查函数检查用户名与密码
+bool CheckRepetition(string UserName, string Password);//检查用户名是否重复
 
 int main()	                                        //主函数
 {
@@ -59,7 +59,7 @@ void WriteUserNumber(int& UserNumber)
 	cout << "当前共有" << UserNumber << "名用户。" << endl;
 }
 
-int CheckUserName(string UserName)
+bool CheckUserName(string UserName)
 {
 	for (unsigned i = 0; i < UserName.size(); i++)
 	{
@@ -72,7 +72,7 @@ int CheckUserName(string UserName)
 	return 1;
 }
 
-int CheckPassword(string Password)
+bool CheckPassword(string Password)
 {
 	int upper_letter(0), lower_letter(0), number(0);
 	for (unsigned  i = 0; i < Password.size(); i++)
@@ -93,7 +93,7 @@ int CheckPassword(string Password)
 	return 1;
 }
 
-int SaveUser(string UserName, string Password)
+bool SaveUser(string UserName, string Password)
 {
 	//vector<string> UserList;
 	//vector<string> PsdList;
@@ -106,7 +106,7 @@ int SaveUser(string UserName, string Password)
 	return 1;
 }
 
-int CheckProfile(string UserName, string Password)
+bool CheckProfile(string UserName, string Password)
 {
 	if (CheckUserName(UserName) == 0)
 	{
@@ -141,7 +141,7 @@ int CheckProfile(string UserName, string Password)
 	return 0;
 }
 
-int CheckRepetition(string UserName, string Password)
+bool CheckRepetition(string UserName, string Password)
 {
 	ifstream inputUserList;
 	int count = 0;
@@ -165,4 +165,3 @@ int CheckRepetition(string UserName, string Password)
 	}
 	return 1;
 }
-
