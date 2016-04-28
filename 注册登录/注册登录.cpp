@@ -11,7 +11,7 @@ bool CheckUserName(string UserName);           //检查用户名是合法
 bool CheckPassword(string Password);            //检查密码是否合法
 bool SaveUser(string UserName, string Password);//将用户名和密码保存至文件
 bool CheckProfile(string UserName, string Password);//调用用户名检查函数与密码检查函数检查用户名与密码
-bool CheckRepetition(string UserName, string Password);//检查用户名是否重复
+bool CheckRepetition(string UserName);//检查用户名是否重复
 bool CheckSigninPsd(string UserName, string Password); //检查登录时密码正确性 
 
 int main()	                                        //主函数
@@ -42,7 +42,7 @@ int main()	                                        //主函数
 		getline(cin, UserName);
 		cout << "\n" << "Input password: ";
 		getline(cin, Password);
-		if (CheckSigninPsd(UserName,Password)==1)
+		if (CheckSigninPsd(UserName, Password) == 1)
 		{
 			cout << "Sign in successfully." << endl;
 		}
@@ -134,7 +134,7 @@ bool CheckProfile(string UserName, string Password)
 	}
 	else
 	{
-		int CheckPepFlag = CheckRepetition(UserName, Password);
+		int CheckPepFlag = CheckRepetition(UserName);
 		if (CheckPepFlag == 0)
 		{
 			cout << "用户名已存在!" << endl;
@@ -157,7 +157,7 @@ bool CheckProfile(string UserName, string Password)
 	return 0;
 }
 
-bool CheckRepetition(string UserName, string Password)
+bool CheckRepetition(string UserName)
 {
 	ifstream inputUserList;
 	int count = 0;
@@ -190,12 +190,12 @@ bool CheckSigninPsd(string UserName, string Password)
 	ifstream inputUserList;
 	ifstream inputPsdList;
 	inputPsdList.open("C:\\Users\\Hanxi\\Music\\login\\password.txt");
-	inputUserList.open("C\\Users\\Hanxi\\Music\\login\\username.txt");
+	inputUserList.open("C:\\Users\\Hanxi\\Music\\login\\username.txt");
 	vector<string> User;
 	vector<string> Psd;
 	string tempUser;
 	string tempPsd;
-	while (getline(inputUserList,tempUser))
+	while (getline(inputUserList, tempUser))
 	{
 		User.push_back(tempUser);
 		countUser++;
