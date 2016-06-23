@@ -3,7 +3,7 @@
 #include<string>
 #include<vector>
 using namespace std;
-int UserNumber = 0;
+int UserNumber = 0;							//定义总的用户数量为全局变量
 
 void ReadUserNumber(int &UserNumber);         //从文件中读取当前用户数
 void WriteUserNumber(int &UserNumber);        //将当前用户数写入文件
