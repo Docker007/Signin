@@ -3,23 +3,23 @@
 #include<string>
 #include<vector>
 using namespace std;
-int UserNumber = 0;							//定义总的用户数量为全局变量
+int UserNumber = 0;							                     //定义总的用户数量为全局变量
 
-void ReadUserNumber(int &UserNumber);         //从文件中读取当前用户数
-void WriteUserNumber(int &UserNumber);        //将当前用户数写入文件
-bool CheckUserName(string UserName);           //检查用户名是合法
-bool CheckPassword(string Password);            //检查密码是否合法
-bool SaveUser(string UserName, string Password);//将用户名和密码保存至文件
-bool CheckProfile(string UserName, string Password);//调用用户名检查函数与密码检查函数检查用户名与密码
-bool CheckRepetition(string UserName);//检查用户名是否重复
-bool CheckSigninPsd(string UserName, string Password); //检查登录时密码正确性 
+void ReadUserNumber(int &UserNumber);                            //从文件中读取当前用户数
+void WriteUserNumber(int &UserNumber);                           //将当前用户数写入文件
+bool CheckUserName(string UserName);                             //检查用户名是合法
+bool CheckPassword(string Password);                             //检查密码是否合法
+bool SaveUser(string UserName, string Password);                 //将用户名和密码保存至文件
+bool CheckProfile(string UserName, string Password);             //调用用户名检查函数与密码检查函数检查用户名与密码
+bool CheckRepetition(string UserName);                           //检查用户名是否重复
+bool CheckSigninPsd(string UserName, string Password);           //检查登录时密码正确性 
 
-int main()	                                        //主函数
+int main()	                                                     //主函数
 {
 	int Select;
 	string UserName;
 	string Password;
-	cout << "1.注册." << endl;                   //功能选择
+	cout << "1.注册." << endl;                                    //功能选择
 	cout << "2.登录." << endl;
 	cout << "3.退出." << endl;
 	cout << "选择一个功能: " << endl;
@@ -160,18 +160,18 @@ bool CheckRepetition(string UserName)
 	ifstream inputUserList;
 	int count = 0;
 	inputUserList.open("C:\\Users\\Hanxi\\Music\\login\\username.txt"); //打开文件
-	vector<string> User;  //临时存储用户名
+	vector<string> User;                                                //临时存储用户名
 	string temp;
-	while (getline(inputUserList,temp))  //将用户名从文件中写入临时vector中
+	while (getline(inputUserList,temp))                                 //将用户名从文件中写入临时vector中
 	{
 		User.push_back(temp);
 		count++;
 	}
-	//for (int i = 0; i < count; i++)   //输出测试
+	//for (int i = 0; i < count; i++)                                   //输出测试
 	//{
 	//	cout << User[i] << endl;
 	//}
-	inputUserList.close();              //关闭文件
+	inputUserList.close();                                              //关闭文件
 	for (int i = 0; i < count; i++)
 	{
 		if (UserName == User[i])
@@ -183,7 +183,7 @@ bool CheckRepetition(string UserName)
 bool CheckSigninPsd(string UserName, string Password)
 {
 	int count = 0;
-	int flag = 0;           //ID是否已注册的标志
+	int flag = 0;                                                       //ID是否已注册的标志
 	int countUser = 0;
 	int countPsd = 0;
 	ifstream inputUserList;
